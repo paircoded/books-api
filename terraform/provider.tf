@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "kubernetes" {
-    secret_suffix    = "books_api"
+    secret_suffix    = "books-api"
     config_path      = "~/.kube/config"
   }
 }
