@@ -104,7 +104,10 @@ resource "kubernetes_deployment" "books_api" {
           port {
             container_port = 80
           }
-
+          volume_mount {
+            mount_path = "/books"
+            name       = "book-storage"
+          }
           env {
             name = "olis_ollama_url"
             value = "http://192.168.1.14:11434"
@@ -113,6 +116,12 @@ resource "kubernetes_deployment" "books_api" {
           env {
             name = "olis_ollama_model"
             value = "impulse2000/dolphin-2.8-experiment26:q6_0_k"
+          }
+        }
+        volume {
+          name = "book-storage"
+          persistent_volume_claim {
+            claim_name = kubernetes_persistent_volume_claim.book_storage.metadata.0.name
           }
         }
       }
