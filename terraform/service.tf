@@ -95,7 +95,7 @@ resource "kubernetes_deployment" "books_api" {
           name = "regcred"
         }
         container {
-          image = "docker-registry.poorlythoughtout.com/books-api:${var.image_tag}"
+          image = "docker-registry.poorlythoughtout.com/paircoded-books-api:${var.image_tag}"
           image_pull_policy = "Always"
           name  = "books-api"
           port {
