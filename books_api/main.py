@@ -1,7 +1,6 @@
-from typing import Union, Annotated
+from typing import Union
 
-from fastapi import FastAPI, Depends, File
-
+from fastapi import FastAPI, Depends, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from books_api.auth.dependencies import account_access_token
@@ -33,5 +32,5 @@ def create_book(item_id: int, q: Union[str, None] = None):
 
 
 @app.post("/books/upload", dependencies=[Depends(account_access_token)])
-def upload_book(file: Annotated[bytes, File()]):
-    return {"file_size": len(file)}
+def upload_book(file: UploadFile):
+    return {"filename": file.filename}
