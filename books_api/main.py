@@ -26,18 +26,17 @@ app.add_middleware(
 
 
 oauth_2_scheme = OAuth2AuthorizationCodeBearer(
-    tokenUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/token",
-    authorizationUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/auth",
-    refreshUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/token",
+    tokenUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/token",
+    authorizationUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/auth",
+    refreshUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/token",
 )
 
 
 async def valid_access_token(
     access_token: Annotated[str, Depends(oauth_2_scheme)]
 ):
-    url = "http://path/to/realm/protocol/openid-connect/certs"
-    optional_custom_headers = {"User-agent": "custom-user-agent"}
-    jwks_client = PyJWKClient(url, headers=optional_custom_headers)
+    url = "https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/certs"
+    jwks_client = PyJWKClient(url)
 
     try:
         signing_key = jwks_client.get_signing_key_from_jwt(access_token)
