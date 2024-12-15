@@ -114,5 +114,5 @@ resource "kubernetes_deployment" "books_api" {
         }
       }
     }
-  }`
+  }
 }
