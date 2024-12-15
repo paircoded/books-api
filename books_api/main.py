@@ -32,6 +32,6 @@ def create_book(item_id: int, q: Union[str, None] = None):
     return {"books": item_id, "q": q}
 
 
-@app.get("/books/upload", dependencies=[Depends(account_access_token)])
+@app.post("/books/upload", dependencies=[Depends(account_access_token)])
 def upload_book(file: Annotated[bytes, File()]):
     return {"file_size": len(file)}
