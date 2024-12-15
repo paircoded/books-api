@@ -28,6 +28,6 @@ def list_home_data():
     }
 
 
-@app.post("/items/{item_id}", dependencies=[Depends(account_access_token)])
+@app.get("/items/{item_id}", dependencies=[Depends(account_access_token)])
 def create_book(item_id: int, q: Union[str, None] = None):
     return {"books": item_id, "q": q}
