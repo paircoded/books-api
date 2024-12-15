@@ -44,7 +44,7 @@ async def valid_access_token(
             access_token,
             signing_key.key,
             algorithms=["RS256"],
-            audience="api",
+            audience="account",
             options={"verify_exp": True},
         )
         return data
