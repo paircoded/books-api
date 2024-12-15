@@ -20,7 +20,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    app = docker.build("olis-restful-json-api")
+                    app = docker.build("paircoded-books-api")
                 }
             }
         }
