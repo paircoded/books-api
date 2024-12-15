@@ -38,7 +38,7 @@ resource "kubernetes_persistent_volume" "book_storage" {
           match_expressions {
             key      = "kubernetes.io/hostname"
             operator = "In"
-            values = ["k8s-worker01.internal.poorlythoughtout.com"]
+            values = ["k8s-master.internal.poorlythoughtout.com"]
           }
         }
       }
