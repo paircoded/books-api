@@ -26,9 +26,9 @@ app.add_middleware(
 
 
 oauth_2_scheme = OAuth2AuthorizationCodeBearer(
-    tokenUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/token",
-    authorizationUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/auth",
-    refreshUrl="https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/token",
+    tokenUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/token",
+    authorizationUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/auth",
+    refreshUrl="http://keycloak.paircoded.svc.cluster.local/realms/paircoded/protocol/openid-connect/token",
 )
 
 
