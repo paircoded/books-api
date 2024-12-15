@@ -87,7 +87,10 @@ resource "kubernetes_deployment" "books_api" {
         }
         annotations = {
           "instrumentation.opentelemetry.io/inject-python" = "true"
-          "nginx.org/client-max-body-size" = "25m"
+          "nginx.ingress.kubernetes.io/proxy-body-size" = "0"
+          "nginx.ingress.kubernetes.io/proxy-read-timeout" = "600"
+          "nginx.ingress.kubernetes.io/proxy-send-timeout" = "600"
+
         }
       }
 
