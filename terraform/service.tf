@@ -29,7 +29,7 @@ resource "kubernetes_ingress_v1" "books_api" {
     labels = {
       AppName = "books-api"
     }
-    annotations {
+    annotations = {
       "nginx.ingress.kubernetes.io/proxy-body-size" = "25m"
       "nginx.ingress.kubernetes.io/proxy-read-timeout" = "30"
       "nginx.ingress.kubernetes.io/proxy-send-timeout" = "30"
