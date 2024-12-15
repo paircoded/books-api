@@ -87,6 +87,9 @@ resource "kubernetes_deployment" "books_api" {
         }
         annotations = {
           "instrumentation.opentelemetry.io/inject-python" = "true"
+          "nginx.ingress.kubernetes.io/proxy-body-size" = "25m"
+          "nginx.ingress.kubernetes.io/proxy-read-timeout" = "30"
+          "nginx.ingress.kubernetes.io/proxy-send-timeout" = "30"
         }
       }
 
