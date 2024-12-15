@@ -1,3 +1,21 @@
+resource "kubernetes_persistent_volume_claim" "book_storage" {
+  metadata {
+    name = "book-storage"
+    namespace = "paircoded"
+  }
+  spec {
+    access_modes = ["ReadWriteMany"]
+    storage_class_name = "local-storage"
+    volume_name = kubernetes_persistent_volume.book_storage.metadata[0].name
+    resources {
+      requests = {
+        storage = "20Gi"
+      }
+    }
+  }
+}
+
+
 resource "kubernetes_persistent_volume" "book_storage" {
   metadata {
     name = "book-storage"
