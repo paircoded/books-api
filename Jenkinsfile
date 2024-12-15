@@ -44,7 +44,7 @@ pipeline {
                             # god help me if I ever do anything concurrently
                             rm -rf ~/.kube && mkdir ~/.kube && chmod 700 ~/.kube && rm -f ~/.kube/config && ln -s ${secretFile} ~/.kube/config
                             cd ${TERRAFORM_DIR}
-                            terraform init
+                            terraform init -migrate-state
                         '''
                     }
                 }
