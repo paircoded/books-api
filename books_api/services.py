@@ -1,9 +1,10 @@
+from sqlalchemy import select
+
+from books_api.persist import models
 from books_api.types import Book, BookList, PaginatedResultSet
 
 
 async def list_books(db_session, offset=0, limit=25) -> PaginatedResultSet[Book]:
-    db_data = await db_session.scalars(Book).offset(offset).limit(limit).all()
-
-    return PaginatedResultSet[Book](
-        offset=offset, limit=limit, objects=BookList.model_validate(db_data)
-    )
+    db_data = await db_session.scalars(select(models.Book).offset(offset).limit(limit))
+    books = [Book.model_validate(row) for row in db_data]
+    return PaginatedResultSet[Book](offset=offset, limit=limit, objects=books)

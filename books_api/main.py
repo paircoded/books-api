@@ -31,7 +31,7 @@ async def list_books(
         limit: int = 25,
         db_session: AsyncSession = Depends(get_db_session),
 ) -> PaginatedResultSet[Book]:
-    await services.list_books(db_session, offset=offset, limit=limit)
+    return await services.list_books(db_session, offset=offset, limit=limit)
 
 
 @app.get("/items/{item_id}", dependencies=[Depends(account_access_token)])
