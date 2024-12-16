@@ -113,7 +113,7 @@ resource "kubernetes_deployment" "books_api" {
             name = "BOOKS_API_POSTGRES_USER"
             value_from {
                 secret_key_ref {
-                    name = "books-api-db-creds",
+                    name = "books-api-db-creds"
                     key = "BOOKS_API_POSTGRES_USER"
                 }
             }
@@ -123,7 +123,7 @@ resource "kubernetes_deployment" "books_api" {
             name = "BOOKS_API_POSTGRES_PASSWORD"
             value_from {
                 secret_key_ref {
-                    name = "books-api-db-creds",
+                    name = "books-api-db-creds"
                     key = "BOOKS_API_POSTGRES_PASSWORD"
                 }
             }
@@ -133,7 +133,7 @@ resource "kubernetes_deployment" "books_api" {
             name = "BOOKS_API_POSTGRES_HOST"
             value_from {
                 secret_key_ref {
-                    name = "books-api-db-creds",
+                    name = "books-api-db-creds"
                     key = "BOOKS_API_POSTGRES_HOST"
                 }
             }
