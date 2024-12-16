@@ -111,20 +111,32 @@ resource "kubernetes_deployment" "books_api" {
 
           env {
             name = "BOOKS_API_POSTGRES_USER"
-            valueFrom = "books-api-db-creds"
-            key = "BOOKS_API_POSTGRES_USER"
+            value_from = {
+                secret_key_ref = {
+                    name: "books-api-db-creds",
+                    key: "BOOKS_API_POSTGRES_USER"
+                }
+            }
           }
 
           env {
             name = "BOOKS_API_POSTGRES_PASSWORD"
-            valueFrom = "books-api-db-creds"
-            key = "BOOKS_API_POSTGRES_PASSWORD"
+            value_from = {
+                secret_key_ref = {
+                    name: "books-api-db-creds",
+                    key: "BOOKS_API_POSTGRES_PASSWORD"
+                }
+            }
           }
 
           env {
             name = "BOOKS_API_POSTGRES_HOST"
-            valueFrom = "books-api-db-creds"
-            key = "BOOKS_API_POSTGRES_HOST"
+            value_from = {
+                secret_key_ref = {
+                    name: "books-api-db-creds",
+                    key: "BOOKS_API_POSTGRES_HOST"
+                }
+            }
           }
         }
         volume {
