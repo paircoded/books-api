@@ -52,15 +52,4 @@ async def upload_book(
         file: UploadFile,
         repository: BookRepository
 ):
-    filename_hash = hashlib.md5(file.filename.encode('utf-8')).hexdigest()
-    filename = f"{filename_hash}.epub"
-    output_file_path = os.path.join(settings.book_storage_base_directory, filename)
-    with open(output_file_path, "wb") as output_file:
-        output_file.write(file.file.read())
-    book = Book(
-        id=uuid.uuid4(),
-        title=file.filename,
-        path=output_file_path,
-    )
-
-    repository.create(book)
+    return await services.save_uploaded_book(repository, file)
