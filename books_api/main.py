@@ -2,9 +2,11 @@ from typing import Union
 
 from fastapi import FastAPI, Depends, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from books_api import services
 from books_api.auth.dependencies import account_access_token
+from books_api.persist.dependencies import get_db_session
 from books_api.types import PaginatedResultSet, Book
 
 app = FastAPI()
@@ -24,8 +26,12 @@ app.add_middleware(
 
 
 @app.get("/books")
-async def list_books(offset: int = 0, limit: int = 25) -> PaginatedResultSet[Book]:
-    await services.list_books(offset=offset, limit=limit)
+async def list_books(
+        offset: int = 0,
+        limit: int = 25,
+        db_session: AsyncSession = Depends(get_db_session),
+) -> PaginatedResultSet[Book]:
+    await services.list_books(db_session, offset=offset, limit=limit)
 
 
 @app.get("/items/{item_id}", dependencies=[Depends(account_access_token)])

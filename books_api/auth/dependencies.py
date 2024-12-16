@@ -7,10 +7,10 @@ from jwt import PyJWKClient
 from books_api.auth.schemes import oauth_2_scheme
 
 
-async def account_access_token(
-        access_token: Annotated[str, Depends(oauth_2_scheme)]
-):
-    url = "https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/certs"
+async def account_access_token(access_token: Annotated[str, Depends(oauth_2_scheme)]):
+    url = (
+        "https://accounts.paircoded.com/realms/paircoded/protocol/openid-connect/certs"
+    )
     jwks_client = PyJWKClient(url)
 
     try:

@@ -1,8 +1,9 @@
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, List
 
 from pydantic import BaseModel, TypeAdapter
 
-DataT = TypeVar('DataT')
+DataT = TypeVar("DataT")
+
 
 class PaginatedResultSet(BaseModel, Generic[DataT]):
     offset: int
@@ -15,4 +16,4 @@ class Book(BaseModel):
     path: str
 
 
-BookList = TypeAdapter(list[Book])
+BookList = TypeAdapter(List[Book])

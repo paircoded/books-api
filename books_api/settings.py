@@ -10,11 +10,14 @@ class Settings(BaseSettings):
     postgres_database: str = "books_db"
     postgres_driver: str = "psycopg"
 
-    model_config = SettingsConfigDict(env_prefix='books_api_')
+    model_config = SettingsConfigDict(env_prefix="books_api_")
 
     @property
     def sqlalchemy_url(self):
-        return (f"postgresql+{self.postgres_driver}://{self.postgres_user}:{self.postgres_password}@"
-                f"{self.postgres_host}:{self.postgres_port}/{self.postgres_database}")
+        return (
+            f"postgresql+{self.postgres_driver}://{self.postgres_user}:{self.postgres_password}@"
+            f"{self.postgres_host}:{self.postgres_port}/{self.postgres_database}"
+        )
+
 
 settings = Settings()
