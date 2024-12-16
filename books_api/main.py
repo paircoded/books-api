@@ -54,7 +54,7 @@ async def list_books(
     "/books/upload",
     dependencies=[Depends(account_access_token)],
     response_model=Book,
-    response_model_exclude={"path"},
+    response_model_exclude={"upload_path"},
 )
 async def upload_book(file: UploadFile, repository: BookRepository):
     return await services.save_uploaded_book(repository, file)

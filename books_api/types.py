@@ -15,4 +15,4 @@ class PaginatedResultSet(BaseModel, Generic[DataT]):
 class Book(BaseModel):
     id: uuid.UUID
     title: str
-    path: str
+    upload_path: str
