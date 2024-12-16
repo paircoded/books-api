@@ -2,12 +2,12 @@ from typing import TypeVar, Generic
 
 from pydantic import BaseModel, TypeAdapter
 
-ContainerT = TypeVar('DataT')
+DataT = TypeVar('DataT')
 
-class PaginatedResultSet(BaseModel, Generic[ContainerT]):
+class PaginatedResultSet(BaseModel, Generic[DataT]):
     offset: int
     limit: int
-    objects: ContainerT
+    objects: list[DataT]
 
 
 class Book(BaseModel):
