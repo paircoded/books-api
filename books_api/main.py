@@ -1,6 +1,3 @@
-import hashlib
-import os
-import uuid
 from typing import Annotated
 
 from fastapi import FastAPI, Depends, UploadFile, status
@@ -12,8 +9,6 @@ from books_api.auth.dependencies import account_access_token
 from books_api.persist import models
 from books_api.persist.dependencies import get_db_session, get_repository
 from books_api.persist.repository import DatabaseRepository
-from books_api.services import save_uploaded_book
-from books_api.settings import settings
 from books_api.types import PaginatedResultSet, Book
 
 app = FastAPI()

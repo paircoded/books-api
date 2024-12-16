@@ -26,7 +26,7 @@ async def save_uploaded_book(repository: DatabaseRepository[models.Book], file) 
     book = Book(
         id=uuid.uuid4(),
         title=file.filename,
-        path=output_file_path,
+        upload_path=output_file_path,
     )
 
     db_book = await repository.create(book.model_dump())
