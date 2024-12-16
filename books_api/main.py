@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from books_api import services
 from books_api.auth.dependencies import account_access_token
-from books_api.types import PaginatedResultSet, BookList
+from books_api.types import PaginatedResultSet, Book
 
 app = FastAPI()
 
@@ -24,7 +24,7 @@ app.add_middleware(
 
 
 @app.get("/books")
-async def list_books(offset: int = 0, limit: int = 25) -> PaginatedResultSet[BookList]:
+async def list_books(offset: int = 0, limit: int = 25) -> PaginatedResultSet[Book]:
     await services.list_books(offset=offset, limit=limit)
 
 
