@@ -108,14 +108,23 @@ resource "kubernetes_deployment" "books_api" {
             mount_path = "/books"
             name       = "book-storage"
           }
+
           env {
-            name = "olis_ollama_url"
-            value = "http://192.168.1.14:11434"
+            name = "BOOKS_API_POSTGRES_USER"
+            valueFrom = "books-api-db-creds"
+            key = "BOOKS_API_POSTGRES_USER"
           }
 
           env {
-            name = "olis_ollama_model"
-            value = "impulse2000/dolphin-2.8-experiment26:q6_0_k"
+            name = "BOOKS_API_POSTGRES_PASSWORD"
+            valueFrom = "books-api-db-creds"
+            key = "BOOKS_API_POSTGRES_PASSWORD"
+          }
+
+          env {
+            name = "BOOKS_API_POSTGRES_HOST"
+            valueFrom = "books-api-db-creds"
+            key = "BOOKS_API_POSTGRES_HOST"
           }
         }
         volume {
