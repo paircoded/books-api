@@ -1,5 +1,6 @@
 import hashlib
 import os
+import uuid
 
 from sqlalchemy import select
 
@@ -22,6 +23,7 @@ async def save_uploaded_book(db_session, file) -> Book:
         output_file.write(file.file.read())
 
     return Book(
+        id=uuid.uuid4(),
         title=file.filename,
         path=output_file_path,
     )
