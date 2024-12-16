@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
 from books_api.persist import models
-from books_api.types import Book, BookList, PaginatedResultSet
+from books_api.types import Book, PaginatedResultSet
 
 
 async def list_books(db_session, offset=0, limit=25) -> PaginatedResultSet[Book]:
