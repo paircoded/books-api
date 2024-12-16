@@ -1,3 +1,4 @@
+import uuid
 from typing import TypeVar, Generic
 
 from pydantic import BaseModel
@@ -12,5 +13,6 @@ class PaginatedResultSet(BaseModel, Generic[DataT]):
 
 
 class Book(BaseModel):
+    id: uuid.UUID
     title: str
     path: str

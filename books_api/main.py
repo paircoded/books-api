@@ -1,5 +1,3 @@
-from typing import Union
-
 from fastapi import FastAPI, Depends, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from books_api import services
 from books_api.auth.dependencies import account_access_token
 from books_api.persist.dependencies import get_db_session
+from books_api.services import save_uploaded_book
 from books_api.types import PaginatedResultSet, Book
 
 app = FastAPI()
@@ -34,6 +33,10 @@ async def list_books(
     return await services.list_books(db_session, offset=offset, limit=limit)
 
 
-@app.post("/books/upload", dependencies=[Depends(account_access_token)])
-def upload_book(file: UploadFile):
-    return {"filename": file.filename}
+
+@app.post("/books/upload", dependencies=[Depends(account_access_token)], response_model=Book, response_model_exclude={'path'})
+async def upload_book(
+        file: UploadFile,
+        db_session: AsyncSession = Depends(get_db_session),
+):
+    return await save_uploaded_book(db_session, file)

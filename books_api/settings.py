@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     postgres_database: str = "books_db"
     postgres_driver: str = "psycopg"
 
+    book_storage_base_directory: str = "/books"
+
     model_config = SettingsConfigDict(env_prefix="books_api_")
 
     @property
