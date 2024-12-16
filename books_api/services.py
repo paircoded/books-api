@@ -15,7 +15,7 @@ async def list_books(db_session, offset=0, limit=25) -> PaginatedResultSet[Book]
 
 
 async def save_uploaded_book(db_session, file) -> Book:
-    filename_hash = hashlib.md5(file.filename).hexdigest()
+    filename_hash = hashlib.md5(file.filename.encode('utf-8')).hexdigest()
     filename = f"{filename_hash}.epub"
     output_file_path = os.path.join(settings.book_storage_base_directory, filename)
     with open(output_file_path, "wb") as output_file:
