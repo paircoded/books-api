@@ -16,3 +16,5 @@ class Settings(BaseSettings):
     def sqlalchemy_url(self):
         return (f"postgresql+{self.postgres_driver}://{self.postgres_user}:{self.postgres_password}@"
                 f"{self.postgres_host}:{self.postgres_port}/{self.postgres_database}")
+
+settings = Settings()

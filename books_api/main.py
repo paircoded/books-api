@@ -3,7 +3,9 @@ from typing import Union
 from fastapi import FastAPI, Depends, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
+from books_api import services
 from books_api.auth.dependencies import account_access_token
+from books_api.types import PaginatedResultSet, BookList
 
 app = FastAPI()
 
@@ -21,9 +23,9 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def list_home_data():
-    return {"hello": "world"}
+@app.get("/books")
+async def list_books(offset: int = 0, limit: int = 25) -> PaginatedResultSet[BookList]:
+    await services.list_books(offset=offset, limit=limit)
 
 
 @app.get("/items/{item_id}", dependencies=[Depends(account_access_token)])
