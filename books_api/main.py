@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 
-@app.get("/books")
+@app.get("/books", dependencies=[Depends(account_access_token)])
 async def list_books(
         offset: int = 0,
         limit: int = 25,
