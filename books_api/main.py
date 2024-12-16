@@ -37,19 +37,24 @@ BookRepository = Annotated[
 ]
 
 
-@app.get("/books", dependencies=[Depends(account_access_token)], status_code=status.HTTP_201_CREATED)
+@app.get(
+    "/books",
+    dependencies=[Depends(account_access_token)],
+    status_code=status.HTTP_201_CREATED,
+)
 async def list_books(
-        offset: int = 0,
-        limit: int = 25,
-        db_session: AsyncSession = Depends(get_db_session),
+    offset: int = 0,
+    limit: int = 25,
+    db_session: AsyncSession = Depends(get_db_session),
 ) -> PaginatedResultSet[Book]:
     return await services.list_books(db_session, offset=offset, limit=limit)
 
 
-@app.post("/books/upload", dependencies=[Depends(account_access_token)], response_model=Book,
-          response_model_exclude={'path'})
-async def upload_book(
-        file: UploadFile,
-        repository: BookRepository
-):
+@app.post(
+    "/books/upload",
+    dependencies=[Depends(account_access_token)],
+    response_model=Book,
+    response_model_exclude={"path"},
+)
+async def upload_book(file: UploadFile, repository: BookRepository):
     return await services.save_uploaded_book(repository, file)

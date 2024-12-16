@@ -27,8 +27,8 @@ class DatabaseRepository(Generic[Model]):
         return await self.session.get(self.model, pk)
 
     async def filter(
-            self,
-            *expressions: BinaryExpression,
+        self,
+        *expressions: BinaryExpression,
     ) -> list[Model]:
         query = select(self.model)
         if expressions:
